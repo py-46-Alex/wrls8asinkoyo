@@ -1,0 +1,21 @@
+version: '3.9'
+# 
+services:
+# 
+  db:
+    container_name: 'base_conteineer'
+    image: postgres:13.0-alpine
+    ports:
+      - "5431:5432"
+      # 
+    environment:
+      POSTGRES_USER: "appadmin"
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: "appdb"
+      # 
+    restart: unless-stopped
+    volumes:
+      - .:/docker-entrypoint-initdb.d # подхватит файл и создаст любую базу с файлами сам файл на скюлЬ
+      - ./logs:/var/log
+      # - postgres_data:/var/lib/postgresql/data/
+      # 
